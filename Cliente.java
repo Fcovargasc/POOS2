@@ -1,19 +1,28 @@
 
 package exp_s2_grupo25;
+/*// En Cliente: para sumar todas las cuentas
+private List<Cuenta_Bancaria> cuentas; // o una sola cuenta si solo puede tener una
 
+public int getSaldoTotal() {
+    int total = 0;
+    for (Cuenta_Bancaria cuenta : cuentas) {
+        total += cuenta.getSaldo();
+    }
+    return total;
+}*/
 
 public  class Cliente implements Mensaje {
     
 
     private String rut,nombre,apellidoPaterno,apellidoMaterno,domicilio,comuna;
-    private int telefono,cuenta,saldo;
+    private int telefono,cuenta;
     
   //constructor sin atributos  
 public Cliente(){} 
 
 //cosntructor con atributos
 
-    public Cliente(String rut, String nombre, String apellidoPaterno, String apellidoMaterno, String domicilio, String comuna, int telefono, int cuenta, int saldo) {
+    public Cliente(String rut, String nombre, String apellidoPaterno, String apellidoMaterno, String domicilio, String comuna, int telefono, int cuenta) {
         this.rut = rut;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -22,7 +31,7 @@ public Cliente(){}
         this.comuna = comuna;
         this.telefono = telefono;
         this.cuenta = cuenta;
-        this.saldo = saldo;
+        
     }
 
 //creando setters and getters
@@ -90,35 +99,17 @@ public Cliente(){}
         this.cuenta = cuenta;
     }
 
-    public int getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(int saldo) {
-        this.saldo = saldo;
-    }
+    
    
     
     
     //creacion de metodos
     
-    public void depositar(){
-        System.out.println("¡Deposito realizado de manera exitosa! ");
-        
-
-    }
-    public void girar (){
-        System.out.println("¡Giro Realizado de manera exitosa!");
-        
-    }
-    public void consultaSaldo(){
-        System.out.println("Saldo Actual $ "+saldo);
-    }
     
-     @Override
-    public void mensaje(){
-        System.out.println("estamos juggfando con la terea");
-    }
+    @Override
+    public void girar(){}
+    
+    
     
     public  void info(){
         
@@ -130,7 +121,8 @@ public Cliente(){}
         System.out.println("Comuna: "+getComuna());
         System.out.println("Telefono: "+getTelefono());
         System.out.println("Numero de Cuenta Corriente: "+getCuenta());
-        System.out.println("Saldo: "+getSaldo());
+        
+        
         
     }
 

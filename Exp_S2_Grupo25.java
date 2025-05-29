@@ -1,6 +1,10 @@
 
 package exp_s2_grupo25;
-
+/* dar mensajes en las distintas opciones 
+si un usuario no esta 
+creado diciendo que priemro se debe 
+crear usuario para efectuar las operaciones
+*/
 
 import java.util.Scanner;
 
@@ -12,29 +16,31 @@ public class Exp_S2_Grupo25 {
        
         Scanner scanner= new Scanner (System.in);
         
-        int opcion;
-        String rut="1111",nombre="fffffffff",apellidoPaterno="tt",apellidoMaterno="uu",domicilio="yuyuyuyu",comuna="rrr";
-        int telefono=666,cuenta=420,saldo=69,deposito=0,giro=0;
+        int opcion,opcionCuenta;
+        String rut="",nombre="",apellidoPaterno="",apellidoMaterno="",domicilio="",comuna="";
+        int telefono=0,cuenta=0,saldo=0,deposito=0,giro=0;
         
-        Cliente cliente =new Cliente(rut,nombre,apellidoPaterno,apellidoMaterno,domicilio,comuna,telefono,cuenta,saldo);
-        Cuenta_Ahorro ca = new Cuenta_Ahorro(cuenta ,saldo,nombre,cliente);
+        Cliente cliente =new Cliente(rut,nombre,apellidoPaterno,apellidoMaterno,domicilio,comuna,telefono,cuenta);
+        Cuenta_Corriente cc = new Cuenta_Corriente(cuenta , saldo,nombre,cliente); 
+        Cuenta_Ahorro ca = new Cuenta_Ahorro(cuenta,saldo ,nombre,cliente);
         Cuenta_Credito credito=new Cuenta_Credito(cuenta ,saldo,nombre,cliente);
-        credito.setSaldo(saldo);
+        
+        
+        
+        
         
         System.out.println("Bienvenidos A Bank Boston");
         do{
         System.out.println("Presione");
         System.out.println("1 Para Registrar Cliente");
         System.out.println("2 Para Ver datos del Cliente");
-        System.out.println("3 Para Depositar");
-        System.out.println("4 Para Girar");
-        System.out.println("5 Para Consultar saldo");
-        System.out.println("6 Para Salir");
+        System.out.println("3 Para elegir tipo de Cuenta");
+        System.out.println("4 Para Consultar saldo");
+        System.out.println("5 Para Salir");
         opcion=scanner.nextInt();
         
         
-        //Cuenta_Credito cc = new Cuenta_Credito();
-       // cc.setNombre(nombre);
+       
        cliente.setRut(rut);
         cliente.setNombre(nombre);
         cliente.setApellidoPaterno(apellidoPaterno);
@@ -43,7 +49,7 @@ public class Exp_S2_Grupo25 {
         cliente.setComuna(comuna);
         cliente.setTelefono(telefono);
         cliente.setCuenta(cuenta);
-        cliente.setSaldo(saldo);
+        
         
         
             switch(opcion){
@@ -67,10 +73,10 @@ public class Exp_S2_Grupo25 {
                     comuna=scanner.nextLine();
                     System.out.println("Ingrese Numero de Telefono");
                     telefono=scanner.nextInt();
-                    
-                    System.out.println("Ingrese Numero de Cuenta");
+                    do{
+                    System.out.println("Ingrese Numero de Cuenta de 9 digitos");
                     cuenta=scanner.nextInt();
-                    
+                    }while(cuenta < 100000000|| cuenta >999999999);
                     break;
                 case 2:
                     System.out.println("Datos del CLiente");
@@ -78,36 +84,91 @@ public class Exp_S2_Grupo25 {
                     
                     break;
                 case 3:
-                    System.out.println("Deposito");
-                    do{
-                    System.out.println("Ingrese monto a depositar");
-                     deposito=scanner.nextInt();
-                    }while(deposito<=0);
-                     saldo+=deposito;
-                    cliente.depositar();
-                    System.out.println("Ud tiene un saldo actual de: "+saldo);
+        do {
+                    System.out.println("Seleccione la cuenta:");
+                    System.out.println("1. Cuenta Ahorro");
+                    System.out.println("2. Cuenta Corriente");
+                    System.out.println("3. Cuenta Crédito");
+                    System.out.println("4. Salir");
+                    opcionCuenta = scanner.nextInt();
+
+                Cuenta_Bancaria cuentaSeleccionada = null;
+
+            switch(opcionCuenta) {
+              case 1:
+                     cuentaSeleccionada = ca;
+                break;
+              case 2:
+                     cuentaSeleccionada = cc;
+                break;
+              case 3:
+                     cuentaSeleccionada = credito;
+                break;
+              case 4:
+                      System.out.println("Saliendo...");
+                break;
+             default:
+                     System.out.println("Opción no válida.");
+    }   
+
+                 if (cuentaSeleccionada != null) {
+                       int opcionOperacion;
+        do {
+               if (opcionCuenta==1) {
+                    ca.tipoCuenta();
+              }else if (opcionCuenta==2) {
+                    cc.tipoCuenta();
+              }else if (opcionCuenta==3) {
+                    credito.tipoCuenta();
+            }
+            
+            opcionOperacion = scanner.nextInt();
+
+            switch(opcionOperacion) {
+                case 1:
+                    
+                    System.out.println("Ingrese monto a depositar: ");
+                    deposito = scanner.nextInt();
+                    cuentaSeleccionada.depositar(deposito);
+                    break;
+                case 2:
+                    if (opcionCuenta==1) {
+                        ca.girar();
+                        break;
+                    }
+                    System.out.println("Ingrese monto a girar: ");
+                    giro = scanner.nextInt();
+                    cuentaSeleccionada.girar(giro);
+                    break;
+                case 3:
+                    System.out.println("Saldo actual: " + cuentaSeleccionada.getSaldo());
                     break;
                 case 4:
-                    System.out.println("Giro");
-                    do{
-                    System.out.println("Ingrese monto a Girar");
-                    giro=scanner.nextInt();
-                    }while(giro>=saldo||giro<0);
-                    saldo-=giro;
-                    cliente.girar();
-                    System.out.println("Ud tiene un saldo actual de: "+saldo);
+                    System.out.println("Volviendo al menú de cuentas...");
                     break;
-                case 5: 
+                default:
+                    System.out.println("Opción no válida.");
+            }
+    }   while(opcionOperacion != 4);
+    }
+
+}        while(opcionCuenta != 4);
+                    break;
+                
+                case 4: 
                     System.out.println("Consulta saldo");
-                    cliente.consultaSaldo();
-                    ca.tipoCuenta();
-                    credito.tipoCuenta();
+                    
+                    System.out.println("Saldo Cuenta Ahorro: " + ca.getSaldo());
+                    System.out.println("Saldo Cuenta Corriente: " + cc.getSaldo());
+                    System.out.println("Saldo Cuenta Crédito: " + credito.getSaldo());
+                    int saldoTotal = ca.getSaldo()+cc.getSaldo()+credito.getSaldo();
+                    System.out.println("Saldo total es: "+saldoTotal);
                     break;
-                case 6 :
+                case 5 :
                     System.out.println("Saliendo... Gracias por venir a Bank Boston");
             }       
         
-        }while(opcion!=6);
+        }while(opcion!=5);
     
         
    

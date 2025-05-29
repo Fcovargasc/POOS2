@@ -13,6 +13,38 @@ public abstract class Cuenta_Bancaria extends Cliente {
         this.nombre=nombre;
         this.cliente=cliente;
     }
+    
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+    
+    
+    
+    public void girar(int giro){
+        if (giro > 0 && saldo >= giro) {
+            
+            saldo -= giro;
+            System.out.println("Saldo Girado exitosamente su saldo actual es:  ");
+        }else {
+            System.out.println("Operacion invalida");}
+    }
+    
+    public void depositar(int deposito){
+        if (deposito >0) {
+            
+            saldo+=deposito;
+            System.out.println("Saldo depositado exitosamente Su saldo actual es: ");
+            
+        }else {
+            System.out.println("Operacion invalida ");
+        }
+    }
+    
     //metodo abstracto
     public abstract void tipoCuenta();
     
