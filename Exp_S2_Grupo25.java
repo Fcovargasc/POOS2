@@ -79,11 +79,20 @@ public class Exp_S2_Grupo25 {
                     }while(cuenta < 100000000|| cuenta >999999999);
                     break;
                 case 2:
-                    System.out.println("Datos del CLiente");
+                    System.out.println("Datos del Cliente");
+                    if (cuenta==0) {
+                        System.out.println("Debe crear un cliente primero");
+                        break;
+                    }
                     cliente.info();
                     
                     break;
                 case 3:
+                    System.out.println("Cuentas Bancarias");
+                    if (cuenta==0) {
+                        System.out.println("Debe crear un cliente primero");
+                        break;
+                    }
         do {
                     System.out.println("Seleccione la cuenta:");
                     System.out.println("1. Cuenta Ahorro");
@@ -157,7 +166,10 @@ public class Exp_S2_Grupo25 {
                 
                 case 4: 
                     System.out.println("Consulta saldo");
-                    
+                    if (cuenta==0) {
+                        System.out.println("Debe crear un cliente primero");
+                        break;
+                    }
                     System.out.println("Saldo Cuenta Ahorro: " + ca.getSaldo());
                     System.out.println("Saldo Cuenta Corriente: " + cc.getSaldo());
                     System.out.println("Saldo Cuenta Crédito: " + credito.getSaldo());
