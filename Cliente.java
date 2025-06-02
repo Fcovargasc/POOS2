@@ -1,15 +1,6 @@
 
 package exp_s2_grupo25;
-/*// En Cliente: para sumar todas las cuentas
-private List<Cuenta_Bancaria> cuentas; // o una sola cuenta si solo puede tener una
 
-public int getSaldoTotal() {
-    int total = 0;
-    for (Cuenta_Bancaria cuenta : cuentas) {
-        total += cuenta.getSaldo();
-    }
-    return total;
-}*/
 
 public  class Cliente implements Mensaje {
     
@@ -17,10 +8,10 @@ public  class Cliente implements Mensaje {
     private String rut,nombre,apellidoPaterno,apellidoMaterno,domicilio,comuna;
     private int telefono,cuenta;
     
-  //constructor sin atributos  
+   
 public Cliente(){} 
 
-//cosntructor con atributos
+
 
     public Cliente(String rut, String nombre, String apellidoPaterno, String apellidoMaterno, String domicilio, String comuna, int telefono, int cuenta) {
         this.rut = rut;
@@ -34,7 +25,7 @@ public Cliente(){}
         
     }
 
-//creando setters and getters
+
     public String getRut() {
         return rut;
     }
@@ -103,14 +94,13 @@ public Cliente(){}
    
     
     
-    //creacion de metodos
     
     
     @Override
     public void girar(){}
     
     
-    
+    @Override
     public  void info(){
         
         System.out.println("Rut: "+getRut());
@@ -121,6 +111,7 @@ public Cliente(){}
         System.out.println("Comuna: "+getComuna());
         System.out.println("Telefono: "+getTelefono());
         System.out.println("Numero de Cuenta Corriente: "+getCuenta());
+        System.out.println("");
         
         
         

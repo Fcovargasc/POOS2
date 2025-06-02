@@ -6,4 +6,5 @@ public interface Mensaje {
     
     void info();
     void girar();
+    
 }

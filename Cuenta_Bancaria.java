@@ -1,8 +1,8 @@
 
 package exp_s2_grupo25;
-//clase abstracta
+
 public abstract class Cuenta_Bancaria extends Cliente {
-    //4 atributos
+    
     protected int cuenta,saldo;
     protected String nombre;
     protected Cliente cliente;
@@ -22,7 +22,9 @@ public abstract class Cuenta_Bancaria extends Cliente {
     public void setSaldo(int saldo) {
         this.saldo = saldo;
     }
-    
+    public int getCuenta(){
+        return cuenta;
+    }
     
     
     public void girar(int giro){
@@ -45,7 +47,7 @@ public abstract class Cuenta_Bancaria extends Cliente {
         }
     }
     
-    //metodo abstracto
+    
     public abstract void tipoCuenta();
     
     
